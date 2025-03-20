@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import {useParams, useNavigate} from 'react-router-dom';
-import api from '../../services/api'
-import './filme.css'
+import './filme.css';
+import api from '../../services/api';
+import { toast } from 'react-toastify'
+
+
 //URL da API: https://api.themoviedb.org/3/movie/now_playing?api_key=ab61e7791bbd8406f46ebfb4f9cbed8f&language=pt-BR
 
 
@@ -45,12 +48,12 @@ function salvarFilme(){
     const existeFilme = filmesSalvos.some((filmesSalvos)=>filmesSalvos.id === filme.id)
 
     if(existeFilme){
-        alert("Este filme ja esta na lista");
+        toast.warning("Este filme ja está na sua lista!");
         return;
     }
     filmesSalvos.push(filme);
     localStorage.setItem("@primeflix",JSON.stringify(filmesSalvos));
-    alert("Filme salvo com sucesso!")
+    toast.success("Filme salvo com sucesso!!")
 }
 if(loading){
     return(
